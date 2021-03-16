@@ -1,0 +1,28 @@
+PODS:
+  - Alamofire (5.4.1)
+  - CircleMenu (4.1.0)
+  - SwiftyGif (5.4.0)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - CircleMenu
+  - SwiftyGif
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CircleMenu
+    - SwiftyGif
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  CircleMenu: a66095199a5e26f19acbb212f077010257767fe5
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: c41d00f57405feb38525859a92d8478df0d5bae0
+
+COCOAPODS: 1.8.4
