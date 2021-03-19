@@ -17,20 +17,20 @@ class ProgrammingViewController: UIViewController {
         super.viewDidLoad()
         
         
-        apiClient.loginClient(completion: {
-            result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let value) :
-                    print(value)
-                    
-                    break
-                case .failure(let error) :
-                   
-                    break
-                }
-            }
-        })
+//        apiClient.loginClient(completion: {
+//            result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let value) :
+//                    print(value)
+//                    
+//                    break
+//                case .failure(let error) :
+//                   
+//                    break
+//                }
+//            }
+//        })
         print(self.item.count)
         // Do any additional setup after loading the view.
     }

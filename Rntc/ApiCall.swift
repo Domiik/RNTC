@@ -23,7 +23,7 @@ enum ApiError: Error {
 }
 
 protocol ApiCall {
-    func loginClient(completion: @escaping (Result<String, Error>) -> Void)
+    func loginClient(url: String, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 
@@ -33,10 +33,10 @@ class ApiClient: ApiCall {
     var items = [ItemScanning]()
     
     
-    func loginClient(completion: @escaping (Result<String, Error>) -> Void) {
+    func loginClient(url: String, completion: @escaping (Result<String, Error>) -> Void) {
         var title, imageUrl: String!
         if Connectivity.isConnectedToInternet {
-            AF.request("http://rntc.bromanla.ml/skanirovaniye.json").responseJSON { response in
+            AF.request(url).responseJSON { response in
                         switch response.result {
                         case .success(let value):
                             if let json = try? JSON(value) {
@@ -45,6 +45,7 @@ class ApiClient: ApiCall {
                                     imageUrl = item["images"].string
                                     let item = ItemScanning(title: title, imagesUrl: imageUrl)
                                     self.items.append(item)
+                                    print(item)
                                 }
                                 completion(.success("ok"))
                             }

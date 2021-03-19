@@ -14,30 +14,36 @@ class DataService {
     
     var items = [ItemScanning]()
     
-    func downloadItem(url: String,completed: @escaping DownloadComplete) {
+    func downloadItem(url: String,completionHandler: @escaping (Bool) -> ()) {
         var title, imageUrl: String!
         if Connectivity.isConnectedToInternet {
             AF.request(url).responseJSON { response in
-                        switch response.result {
-                        case .success(let value):
-                            if let json = try? JSON(value) {
-                                for item in json["items"].arrayValue {
-                                    title = item["title"].string
-                                    imageUrl = item["images"].string
-                                    let item = ItemScanning(title: title, imagesUrl: imageUrl)
-                                    self.items.append(item)
-                                }
-                            }
-                            completed()
-                            break
-                        case .failure(let error):
-                            print(error)
-                            completed()
-                            break
+                switch response.result {
+                case .success(let value):
+                    if let json = try? JSON(value) {
+                        for item in json["items"].arrayValue {
+                            title = item["title"].string
+                            imageUrl = item["images"].string
+                            let item = ItemScanning(title: title, imagesUrl: imageUrl)
+                            self.items.append(item)
                         }
-                       }
+                        completionHandler(true)
+                    }
+                    break
+                case .failure(let error):
+                    print(error)
+                    completionHandler(false)
+                    break
+                }
+            }
         } else {
-            completed()
+            UIAlert
+            completionHandler(false)
         }
+    }
+    
+    
+    func removeAllItem() {
+        items.removeAll()
     }
 }

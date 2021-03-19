@@ -19,21 +19,21 @@ class ItemScanning {
         self.imagesUrl = imagesUrl
     }
     
-     func downloadImage(completed: @escaping DownloadComplete) {
+     func downloadImage(completionHandler: @escaping (Bool) -> ()) {
         AF.request(self.imagesUrl).responseData { (response) in
             switch response.result {
             case .success(let value):
                 if let image = UIImage(data: value) {
                     self.rntcImage = image
                 }
-                completed()
+                completionHandler(true)
                 break
             case .failure(let error):
                 print(error)
+                completionHandler(false)
                 break
             }
         }
-        completed()
     }
 
 }

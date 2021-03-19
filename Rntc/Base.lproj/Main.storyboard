@@ -22,7 +22,7 @@
                                     <constraint firstAttribute="height" constant="90" id="OEb-6h-4mz"/>
                                     <constraint firstAttribute="width" constant="90" id="rsx-b3-Rv5"/>
                                 </constraints>
-                                <state key="normal" image="РНТЦ _лого"/>
+                                <state key="normal" image="РНТЦ _лого1"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="buttonsCount">
                                         <integer key="value" value="5"/>
@@ -64,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2697" y="330"/>
+            <point key="canvasLocation" x="2745" y="330"/>
         </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="uMz-IM-PeX">
@@ -184,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fck-PH-ryE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3793" y="1061"/>
+            <point key="canvasLocation" x="3793" y="1084"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g8z-Hu-7cq">
@@ -209,7 +209,7 @@
         <segue reference="IpH-Mp-jvn"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="РНТЦ _лого" width="500" height="500"/>
+        <image name="РНТЦ _лого1" width="100" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
