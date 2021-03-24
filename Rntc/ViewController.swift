@@ -27,22 +27,20 @@ class ViewController: UIViewController, CircleMenuDelegate {
     
     func circleMenu(_: CircleMenu, willDisplay button: UIButton, atIndex: Int) {
         button.backgroundColor = items[atIndex].color
-
+        
         button.setImage(UIImage(named: items[atIndex].icon), for: .normal)
-
+        
         // set highlited image
         let highlightedImage = UIImage(named: items[atIndex].icon)?.withRenderingMode(.alwaysTemplate)
         button.setImage(highlightedImage, for: .highlighted)
         button.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
     }
-
+    
     func circleMenu(_: CircleMenu, buttonWillSelected _: UIButton, atIndex: Int) {
         //print("button will selected: \(atIndex)")
     }
-
+    
     func circleMenu(_: CircleMenu, buttonDidSelected _: UIButton, atIndex: Int) {
-        
-
         if atIndex == 0 {
             performSegue(withIdentifier: "ContentModeling", sender: nil)
         } else if atIndex == 1 {
@@ -54,36 +52,41 @@ class ViewController: UIViewController, CircleMenuDelegate {
         } else  if atIndex == 4 {
             performSegue(withIdentifier: "ContentRobots", sender: nil)
         }
-   
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if segue.identifier == "ContentModeling" {
             guard let destination = segue.destination as? MenuTableViewController else { return }
             destination.modalPresentationStyle = .fullScreen
             destination.urlTransition = MODELING_URL
+            destination.nameNavigationBar = "Моделирование"
         } else if segue.identifier == "ContentProgrammig" {
             guard let destination = segue.destination as? MenuTableViewController else { return }
             destination.modalPresentationStyle = .fullScreen
             destination.urlTransition = PROGRAMMING_URL
+            destination.nameNavigationBar = "Программирование"
         } else if segue.identifier == "ContentProduction" {
             guard let destination = segue.destination as? MenuTableViewController else { return }
             destination.modalPresentationStyle = .fullScreen
             destination.urlTransition = PRODUCTION_URL
+            destination.nameNavigationBar = "Производство"
         } else if segue.identifier == "ContentScanning" {
             guard let destination = segue.destination as? MenuTableViewController else { return }
             destination.modalPresentationStyle = .fullScreen
             destination.urlTransition = SCANING_URL
+            destination.nameNavigationBar = "Дизайн"
         } else if segue.identifier == "ContentRobots" {
             guard let destination = segue.destination as? MenuTableViewController else { return }
             destination.modalPresentationStyle = .fullScreen
             destination.urlTransition = ROBOTS_URL
+            destination.nameNavigationBar = "Робототехника"
         }
     }
- }
-    
-    
+}
+
+
 
 
 

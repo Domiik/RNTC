@@ -12,19 +12,16 @@ class MenuTableViewController: UITableViewController {
     
     var activityIndicatorView: UIActivityIndicatorView!
     var urlTransition: String!
-    //var refreshControl: UIRefreshControl!
-    let apiClient = ApiClient()
+    
+    var nameNavigationBar: String!
+    var newImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicatorView = UIActivityIndicatorView(style: .white)
+        navigationItem.title = nameNavigationBar
+        activityIndicatorView = UIActivityIndicatorView(style: .medium)
         tableView.backgroundView = activityIndicatorView
         activityIndicatorView.startAnimating()
-        //        self.refreshControl = UIRefreshControl()
-        //        self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        //        self.refreshControl!.addTarget(self, action: #selector(reloadData), for: UIControl.Event.valueChanged)
-        
-        
         reloadData()
     }
     
@@ -42,11 +39,14 @@ class MenuTableViewController: UITableViewController {
                         })
                     }
                 } else {
-                    print("error alert")
+                    let alert = UIAlertController(title: "Нет интернет соединения!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо!", style: .default, handler: nil))
+                    self.present(alert, animated: true)
                 }
             }
         })
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -62,7 +62,6 @@ class MenuTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print(DataService.instance.items.count)
         return DataService.instance.items.count
     }
     
@@ -75,8 +74,40 @@ class MenuTableViewController: UITableViewController {
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Contact" {
+            guard let destination = segue.destination as? ContactViewController else { return }
+            switch urlTransition {
+            case PROGRAMMING_URL:
+                destination.nameContact = "PV"
+                break
+            case MODELING_URL:
+                destination.nameContact = "EV"
+                break
+            case SCANING_URL:
+                destination.nameContact = "MP"
+                break
+            case ROBOTS_URL:
+                destination.nameContact = "MP"
+                break
+            case PRODUCTION_URL:
+                destination.nameContact = "MP"
+                break
+            default:
+                destination.nameContact = "MP"
+                break
+            }
+        }
+    }
     
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell = tableView.cellForRow(at: indexPath) as! MenuTableViewCell
+        newImage = selectedCell.imageMenu.image
+        if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? ContentViewController {
+            vc.passedImage = newImage
+            present(vc, animated: true, completion: nil)
+        }
+    }
     
     
     /*

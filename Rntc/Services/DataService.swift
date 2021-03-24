@@ -9,6 +9,18 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+struct Connectivity {
+    static let sharedInstance = NetworkReachabilityManager()!
+    static var isConnectedToInternet:Bool {
+        return self.sharedInstance.isReachable
+    }
+}
+
+enum ApiError: Error {
+    case noData
+    case noConnection
+}
+
 class DataService {
     static let instance = DataService()
     
@@ -31,13 +43,13 @@ class DataService {
                     }
                     break
                 case .failure(let error):
-                    print(error)
+                    print(ApiError.noData)
                     completionHandler(false)
                     break
                 }
             }
         } else {
-            UIAlert
+            print(ApiError.noConnection)
             completionHandler(false)
         }
     }

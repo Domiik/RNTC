@@ -13,19 +13,22 @@ class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var nameMenuLbl: UILabel!
     
     func configureCell(_ item: ItemScanning) {
-        nameMenuLbl.text = item.title
-        if item.rntcImage != nil {
-            imageMenu.image = item.rntcImage
-        } else {
-            imageMenu.image = UIImage(named: "РНТЦ _лого1")
+        guard nameMenuLbl.text != nil else {
+            nameMenuLbl.text = "Загрузка"
+            return
         }
-    } 
+        nameMenuLbl.text = item.title
+        guard item.rntcImage != nil else {
+            imageMenu.image = UIImage(named: "РНТЦ _лого1")
+            return
+        }
+        imageMenu.image = item.rntcImage
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

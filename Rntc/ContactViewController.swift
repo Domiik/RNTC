@@ -20,16 +20,12 @@ class ContactViewController: UIViewController {
         contactImageView.addGestureRecognizer(tapGR)
         contactImageView.isUserInteractionEnabled = true
         if nameContact == "EV" {
-            contactImageView.image = #imageLiteral(resourceName: "QR-code_vcard_EV")
+            contactImageView.image = #imageLiteral(resourceName: "EP.png")
         }else if nameContact == "MP"{
-            contactImageView.image = #imageLiteral(resourceName: "QR-code_vcard_MP")
+            contactImageView.image = #imageLiteral(resourceName: "MP.png")
         } else if nameContact == "PV"{
-            contactImageView.image = #imageLiteral(resourceName: "QR-code_vcard_PV")
-        } else if nameContact == "IE" {
-            contactImageView.image = #imageLiteral(resourceName: "QR-code_vcard_IE")
+            contactImageView.image = #imageLiteral(resourceName: "PV.png")
         }
-        
-        print(nameContact)
     }
     
     @objc func imageTapped(sender: UITapGestureRecognizer) {
@@ -56,9 +52,13 @@ class ContactViewController: UIViewController {
                 
                 do {
                     try store.execute(saveRequest)
+                    let alert = UIAlertController(title: "Контакт успешно добавлен!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо!", style: .default, handler: nil))
+                    self.present(alert, animated: true)
                 } catch {
-                    print("Saving contact failed, error: \(error)")
-                    // Handle the error
+                    let alert = UIAlertController(title: "Не получается сохранить контакт!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо!", style: .default, handler: nil))
+                    self.present(alert, animated: true)
                 }
             } else if nameContact == "MP"{
                 
@@ -82,9 +82,13 @@ class ContactViewController: UIViewController {
                 
                 do {
                     try store.execute(saveRequest)
+                    let alert = UIAlertController(title: "Контакт успешно добавлен!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо!", style: .default, handler: nil))
+                    self.present(alert, animated: true)
                 } catch {
-                    print("Saving contact failed, error: \(error)")
-                    // Handle the error
+                    let alert = UIAlertController(title: "Не получается сохранить контакт!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо!", style: .default, handler: nil))
+                    self.present(alert, animated: true)
                 }
             } else if nameContact == "PV"{
                 
@@ -108,35 +112,13 @@ class ContactViewController: UIViewController {
                 
                 do {
                     try store.execute(saveRequest)
+                    let alert = UIAlertController(title: "Контакт успешно добавлен!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо!", style: .default, handler: nil))
+                    self.present(alert, animated: true)
                 } catch {
-                    print("Saving contact failed, error: \(error)")
-                    // Handle the error
-                }
-            } else if nameContact == "IE"{
-                
-                let contact = CNMutableContact()
-                
-                contact.givenName = "Иван"
-                contact.familyName = "Захаров"
-                contact.middleName = "Евгеньевич"
-                
-                let homeEmail = CNLabeledValue(label: CNLabelHome, value: "iezakharov@chsu.ru" as NSString)
-                contact.emailAddresses = [homeEmail]
-                
-                contact.phoneNumbers = [CNLabeledValue(
-                                            label: CNLabelPhoneNumberiPhone,
-                                            value: CNPhoneNumber(stringValue: "+79217320884"))]
-                
-                
-                let store = CNContactStore()
-                let saveRequest = CNSaveRequest()
-                saveRequest.add(contact, toContainerWithIdentifier: nil)
-                
-                do {
-                    try store.execute(saveRequest)
-                } catch {
-                    print("Saving contact failed, error: \(error)")
-                    // Handle the error
+                    let alert = UIAlertController(title: "Не получается сохранить контакт!", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Хорошо!", style: .default, handler: nil))
+                    self.present(alert, animated: true)
                 }
             }
         }
