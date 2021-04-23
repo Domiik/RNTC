@@ -16,7 +16,7 @@ class ContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard passedImage != nil else {
-            passedImage = UIImage(named: "РНТЦ _лого1")
+            passedImage = UIImage(named: "РНТЦ _лого")
             return
         }
         contectImageView.image = passedImage

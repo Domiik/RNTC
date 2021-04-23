@@ -19,7 +19,7 @@ class MenuTableViewCell: UITableViewCell {
         }
         nameMenuLbl.text = item.title
         guard item.rntcImage != nil else {
-            imageMenu.image = UIImage(named: "РНТЦ _лого1")
+            imageMenu.image = UIImage(named: "РНТЦ _лого")
             return
         }
         imageMenu.image = item.rntcImage

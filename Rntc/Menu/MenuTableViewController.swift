@@ -16,11 +16,19 @@ class MenuTableViewController: UITableViewController {
     var nameNavigationBar: String!
     var newImage: UIImage!
     
+    let myRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        return refreshControl
+    }()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = nameNavigationBar
         activityIndicatorView = UIActivityIndicatorView(style: .medium)
         tableView.backgroundView = activityIndicatorView
+        tableView.refreshControl = myRefreshControl
         activityIndicatorView.startAnimating()
         reloadData()
     }
@@ -33,9 +41,8 @@ class MenuTableViewController: UITableViewController {
                 if isSuccess {
                     for item in DataService.instance.items {
                         item.downloadImage(completionHandler: {_ in
-                            self.tableView.reloadData()
                             self.activityIndicatorView.stopAnimating()
-                            self.refreshControl?.endRefreshing()
+                            self.tableView.reloadData()
                         })
                     }
                 } else {
@@ -45,6 +52,13 @@ class MenuTableViewController: UITableViewController {
                 }
             }
         })
+    }
+    
+    @objc private func refresh(sender: UIRefreshControl) {
+        DataService.instance.removeAllItem()
+        reloadData()
+        self.myRefreshControl.endRefreshing()
+        self.tableView.reloadData()
     }
     
     
@@ -66,12 +80,15 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! MenuTableViewCell
-        
-        let item = DataService.instance.items[indexPath.row]
-        cell.configureCell(item)
-        
-        return cell
+        if(indexPath.row > DataService.instance.items.count-1){
+            return UITableViewCell()
+        } else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! MenuTableViewCell
+            let item = DataService.instance.items[indexPath.row]
+            cell.configureCell(item)
+            
+            return cell
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

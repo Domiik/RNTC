@@ -7,10 +7,10 @@
 
 import Foundation
 
-let SCANING_URL = "http://rntc.bromanla.ml/skanirovaniye.json"
-let PROGRAMMING_URL = "http://rntc.bromanla.ml/razrabotka.json"
-let MODELING_URL = "http://rntc.bromanla.ml/modelirovaniye.json"
-let ROBOTS_URL = "http://rntc.bromanla.ml/robototekhnika.json"
-let PRODUCTION_URL = "http://rntc.bromanla.ml/proizvodstvo.json"
+let SCANING_URL = "http://rntc.bromanla.ml/scanning.json"
+let PROGRAMMING_URL = "http://rntc.bromanla.ml/development.json"
+let MODELING_URL = "http://rntc.bromanla.ml/modeling.json"
+let ROBOTS_URL = "http://rntc.bromanla.ml/robots.json"
+let PRODUCTION_URL = "http://rntc.bromanla.ml/prodaction.json"
 
 typealias DownloadComplete = () -> ()

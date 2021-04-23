@@ -22,7 +22,13 @@ class ViewController: UIViewController, CircleMenuDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
+        DataService.instance.removeAllItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        buttonCircle.pulsate()
     }
     
     func circleMenu(_: CircleMenu, willDisplay button: UIButton, atIndex: Int) {
@@ -84,6 +90,39 @@ class ViewController: UIViewController, CircleMenuDelegate {
             destination.nameNavigationBar = "Робототехника"
         }
     }
+    
+    
+    @IBAction func animateButton(sender: UIButton) {
+
+        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+
+        UIView.animate(withDuration: 2.0,
+                                   delay: 0,
+                                   usingSpringWithDamping: CGFloat(0.20),
+                                   initialSpringVelocity: CGFloat(6.0),
+                                   options: UIView.AnimationOptions.allowUserInteraction,
+                                   animations: {
+                                    sender.transform = CGAffineTransform.identity
+            },
+                                   completion: { Void in()  }
+        )
+    }
+}
+
+extension UIButton {
+
+        func pulsate() {
+            let pulse = CASpringAnimation(keyPath: "transform.scale")
+            pulse.duration = 0.2
+            pulse.fromValue = 0.95
+            pulse.toValue = 1.0
+            pulse.autoreverses = true
+            pulse.repeatCount = .greatestFiniteMagnitude
+            pulse.initialVelocity = 0.5
+            pulse.damping = 1.0
+            layer.add(pulse, forKey: "pulse")
+        }
+
 }
 
 
